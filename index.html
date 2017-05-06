@@ -13,10 +13,26 @@
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
 <div id='map'></div>
+<div class="container">
+    <h1>Red letterboxes</h1>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="jumbotron">
+                <h1>Find a red letterbox near you</h1>
+                <p>Belgian red letterboxes: you never know quite where they are and when they get serviced. Now there’s an app that tells you.&nbsp; </p>
+                <p><a class="btn btn-default mapboxgl-ctrl-geolocate" role="button" href="#">Find a red box!</a></p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6"></div>
+    </div>
+    <footer></footer>
+</div>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiY3luZGRsIiwiYSI6ImNqMmQ0eWh1aTAwMTcyeG11b3lndWVkc3YifQ.049hpbiQsCbEHLmc0e91lw';

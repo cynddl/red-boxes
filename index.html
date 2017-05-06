@@ -26,7 +26,7 @@
             <div class="jumbotron">
                 <h1>Find a red letterbox near you</h1>
                 <p>Belgian red letterboxes: you never know quite where they are and when they get serviced. Now there’s an app that tells you.&nbsp; </p>
-                <p><a class="btn btn-default mapboxgl-ctrl-geolocate" role="button" href="#">Find a red box!</a></p>
+                <p><a class="btn btn-default mapboxgl-ctrl-geolocate" id="start-find" role="button" href="#">Find a red box!</a></p>
             </div>
         </div>
         <div class="col-lg-6 col-md-6"></div>
@@ -293,6 +293,13 @@ $.getJSON("assets/markers.geojson", function(data){
         .setHTML(html_content)
         .addTo(map);
   });
+</script>
+<script>
+    $("#start-find").click(function () {
+        geoLocate._onClickGeolocate();
+        $(".container").hide();
+    });
+    // extra UI
 </script>
 </body>
 </html>

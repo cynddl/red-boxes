@@ -105,8 +105,6 @@ function next_passage(m) {
 
   m["from_now"] = next_day.from(date_now);
   m["open_today"] = next_day < tonight;
-
-  m["open_today"] = Math.random() > 0.8; // for testing
   return m
 }
 
@@ -118,7 +116,7 @@ function update_data(data) {
 
 
 map.on('load', function() {
-$.getJSON("/assets/markers.geojson", function(data){
+$.getJSON("assets/markers.geojson", function(data){
     map.addSource("boxes", {
         type: "geojson",
         data: update_data(data),
@@ -190,78 +188,95 @@ $.getJSON("/assets/markers.geojson", function(data){
     });
 
     map.addLayer({
-        id: "cluster-count",
-        type: "symbol",
-        source: "boxes",
-        filter: ["has", "point_count"],
-        layout: {
-            "text-field": "{point_count_abbreviated}",
-            "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-            "text-size": 12
-        }
+      id: "cluster-count",
+      type: "symbol",
+      source: "boxes",
+      filter: ["has", "point_count"],
+      layout: {
+          "text-field": "{point_count_abbreviated}",
+          "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+          "text-size": 12
+      }
     });
 
     map.addLayer({
-        id: "unclustered-point",
-        type: "circle",
-        source: "boxes",
-        filter: ["!has", "point_count"],
+      id: "unclustered-point",
+      type: "circle",
+      source: "boxes",
+      filter: ["!has", "point_count"],
 
-        'paint': {
-            // make circles larger as the user zooms from z12 to z22
-            'circle-radius': {
-                'base': 1.75,
-                'stops': [[12, 2], [22, 180*2]]
-            },
-            // color circles by ethnicity, using data-driven styles
-            'circle-color': {
-                property: 'open_today',
-                type: 'categorical',
-                stops: [
-                    [true, '#cccccc'],
-                    [false, '#e22f39']
-                ]
-            },
+      'paint': {
+          // make circles larger as the user zooms from z12 to z22
+          'circle-radius': {
+              'base': 1.75,
+              'stops': [[12, 2], [22, 180*2.5]]
+          },
+          // color circles by ethnicity, using data-driven styles
+          'circle-color': {
+              property: 'open_today',
+              type: 'categorical',
+              stops: [
+                  [false, '#cccccc'],
+                  [true, '#e22f39']
+              ]
+          },
 
-            'circle-stroke-width': 2,
-            'circle-stroke-color': {
-                property: 'open_today',
-                type: 'categorical',
-                stops: [
-                    [true, '#aaaaaa'],
-                    [false, '#99151b']
-                ]
-            },
-        }
+          'circle-stroke-width': 2,
+          'circle-stroke-color': {
+              property: 'open_today',
+              type: 'categorical',
+              stops: [
+                  [false, '#aaaaaa'],
+                  [true, '#99151b']
+              ]
+          },
+      }
     });
+  });
 });
-});
 
-// Geolocation
-var geoLocate = new mapboxgl.GeolocateControl();
-map.addControl(geoLocate);
-geoLocate.on('geolocate', function(e) {
+  var nav = new mapboxgl.NavigationControl();
+  map.addControl(nav, 'top-left');
 
-  var coords = [e.coords.longitude, e.coords.latitude];
+  // Geolocation
+  var geoLocate = new mapboxgl.GeolocateControl();
+  map.addControl(geoLocate);
+  geoLocate.on('geolocate', function(e) {
+    var coords = [e.coords.longitude, e.coords.latitude];
 
-  map.getSource('single-point').setData({
-      "type": "Point",
-      "coordinates": coords
+    map.getSource('single-point').setData({
+        "type": "Point",
+        "coordinates": coords
+    });
+
+    map.getSource('polygon').setData(createGeoJSONCircle(coords, 1).data);
+    map.setZoom(13);
   });
 
-  map.getSource('polygon').setData(createGeoJSONCircle(coords, 1).data);
+  map.on('mouseenter', 'unclustered-point', function () {
+      map.getCanvas().style.cursor = 'pointer';
+  });
+  map.on('mouseleave', 'unclustered-point', function () {
+      map.getCanvas().style.cursor = '';
+  });
 
-  map.setZoom(13);
-});
+  map.on('click', 'unclustered-point', function (e) {
+    var props = e.features[0].properties;
 
-map.on('click', 'unclustered-point', function (e) {
-  new mapboxgl.Popup()
-      .setLngLat(e.features[0].geometry.coordinates)
-      // .setHTML(e.features[0].properties.address_fr)
-      .setHTML(e.features[0].properties.from_now)
-      .addTo(map);
-});
+    var html_content = props.address_fr.replace("\n", "<br />") +
+                       "<br />Mon-Fri: " +
+                       props.hours_week + ":" + props.minutes_week + "<br />Sat: ";
 
+    if (props.hours_sat != "null")
+      html_content += props.hours_sat + ":" + props.minutes_sat;
+    else
+      html_content += "no schedule"
+
+    new mapboxgl.Popup()
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML(html_content)
+        .addTo(map);
+  });
 </script>
 </body>
 </html>

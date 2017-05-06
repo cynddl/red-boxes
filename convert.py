@@ -10,8 +10,8 @@ def fix_time(ts, postfix="week"):
         }
     else:
         return {
-            "hours_" + postfix: int(ts[:2]),
-            "minutes_" + postfix: int(ts[3:])
+            "hours_" + postfix: ts[:2],
+            "minutes_" + postfix: ts[3:]
         }
 
 

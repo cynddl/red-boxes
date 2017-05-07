@@ -212,16 +212,13 @@ $.getJSON("assets/markers.geojson", function(data){
       },
     }
   });
-});
-});
-
 
 // Add navigation and geolocation controls
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-left');
 
 // Geolocation
-var geoLocate = new mapboxgl.GeolocateControl();
+window.geoLocate = new mapboxgl.GeolocateControl();
 map.addControl(geoLocate);
 geoLocate.on('geolocate', function(e) {
   var coords = [e.coords.longitude, e.coords.latitude];
@@ -260,4 +257,7 @@ map.on('click', 'unclustered-point', function (e) {
     .setLngLat(e.features[0].geometry.coordinates)
     .setHTML(html_content)
     .addTo(map);
+});
+
+});
 });

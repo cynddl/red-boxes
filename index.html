@@ -4,44 +4,44 @@
     <meta charset='utf-8' />
     <title>Red Boxes</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
+    <style type="text/css">
+      #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-<div id='map'></div>
-<div class="container">
-    <h1>Red letterboxes</h1>
-    <div class="row">
-        <div class="col-lg-6 col-md-6">
-            <div class="jumbotron">
-                <h1>Find a red letterbox near you</h1>
-                <p>Belgian red letterboxes: you never know quite where they are and when they get serviced. Now there’s an app that tells you:</p>
-                <p><a class="btn btn-default mapboxgl-ctrl-geolocate" id="start-find" role="button" href="#">Find a red box!</a></p>
-                <p><small>And <a href="http://i.liketightpants.net/and/finding-red-letterboxes-in-belgium">read the blog post on how we did it</a></small></p>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6"></div>
-    </div>
-    <footer></footer>
-</div>
+<div id="map"></div>
 
+<div id="overlayContainer" class="container-fluid">
+  <div class="row pb">
+    <div class="col-md-5 offset-md-1">
+      <div class="card mt-4">
+        <div class="card-block p-4">
+          <h1 class="card-title display-4">Find a red letterbox near you</h1>
+          <p class="card-text lead">
+            Belgian red letterboxes: you never know quite where they are and when
+            they get serviced. Now there’s an app that tells you:
+          </p>
+          <p><a class="btn btn-primary mapboxgl-ctrl-geolocate" id="start-find" role="button" href="#">Find a red box!</a></p>
+          <p>And <a class="" href="http://i.liketightpants.net/and/finding-red-letterboxes-in-belgium">read the blog post on how we did it</a>.</p>
+        </div>
+      </div>
+  </div>
+</div>
 
 <script src="assets/js/main.js" charset="utf-8"></script>
 <script>
-    $("#start-find").click(function () {
-        geoLocate._onClickGeolocate();
-        $(".container").hide();
-    });
+  $("#start-find").click(function () {
+    geoLocate._onClickGeolocate();
+    $("#overlayContainer").hide();
+  });
 </script>
 </body>
 </html>

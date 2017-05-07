@@ -153,9 +153,9 @@ $.getJSON("assets/markers.geojson", function(data){
         property: "point_count",
         type: "interval",
         stops: [
-          [0, "#51bbd6"],
-          [100, "#f1f075"],
-          [750, "#f28cb1"],
+          [0, "#ff0000"],
+          [100, "#ff0000"],
+          [750, "#ff0000"],
         ]
       },
       "circle-radius": {
@@ -251,7 +251,7 @@ map.on('click', 'unclustered-point', function (e) {
   if (props.hours_sat != "null")
     html_content += props.hours_sat + ":" + props.minutes_sat;
   else
-    html_content += "no schedule"
+    html_content += "no schedule";
 
   new mapboxgl.Popup()
     .setLngLat(e.features[0].geometry.coordinates)

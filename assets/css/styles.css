@@ -1,0 +1,15 @@
+/*.card {
+    background-color: rgba(255, 0, 0, .8);
+}*/
+
+/* Don’t display the large header on the phone */
+@media screen and (max-width: 768px) {
+    .display-4 {
+        display:none;
+    }
+}
+
+/* This way the text can span multiple lines */
+.btn {
+    white-space: normal;
+}

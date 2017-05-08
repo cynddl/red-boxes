@@ -149,15 +149,7 @@ $.getJSON("assets/markers.geojson", function(data){
     source: "boxes",
     filter: ["has", "point_count"],
     paint: {
-      "circle-color": {
-        property: "point_count",
-        type: "interval",
-        stops: [
-          [0, "#ff0000"],
-          [100, "#ff0000"],
-          [750, "#ff0000"],
-        ]
-      },
+      "circle-color": "#e22f39",
       "circle-radius": {
         property: "point_count",
         type: "interval",

@@ -30,8 +30,7 @@ var i18n = {
         'read-blog-post': 'Hier lees je hoe en waarom we de app gebouwd hebben'
     }
 };
-$('[data-i18n]').each(function(i, el) {
-    var $el = $(this);
-    var key = $el.attr('data-i18n');
-    $el.text(i18n[interfaceLang][key]);
+Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (item) {
+    var key = item.getAttribute('data-i18n');
+    item.innerText = i18n[interfaceLang][key];
 });

@@ -4,15 +4,9 @@ from tqdm import tqdm
 
 def fix_time(ts, postfix="week"):
     if ts == "":
-        return {
-            "hours_" + postfix: None,
-            "minutes_" + postfix: None
-        }
-    else:
-        return {
-            "hours_" + postfix: ts[:2],
-            "minutes_" + postfix: ts[3:]
-        }
+        return {"ts_" + postfix: None}
+
+    return {"ts_" + postfix: int(ts[:2]) * 60 + int(ts[3:])}
 
 
 def convert_marker(m):
@@ -38,7 +32,7 @@ with open("raw_markers.json", "r") as fo, open("assets/markers.geojson", "w") as
 
     out_json = {
         "type": "FeatureCollection",
-        "crs": {"type": "name", "properties": {"name": "redboxes"}},
+        # "crs": {"type": "name", "properties": {"name": "redboxes"}},
         "features": [convert_marker(m) for m in tqdm(markers)]
     }
-    json.dump(out_json, fw, indent=4)
+    json.dump(out_json, fw)

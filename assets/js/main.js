@@ -174,4 +174,10 @@ map.on('load', function() {
       .setHTML(html_content)
       .addTo(map);
   });
+
+  // remove spinner and show find button when all content loaded
+  map.on('data', function() {
+      document.getElementById("spinner").style.display = "none";
+      document.getElementById("start-find").style.display = "inherit";
+  })
 });

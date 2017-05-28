@@ -24,7 +24,12 @@
       <div class="card mt-4">
         <div class="card-block p-4">
           <h1 class="card-title display-4" data-i18n="title">Find a red letterbox near you</h1>
-          <p><a class="btn btn-primary btn-block" id="start-find" role="button" href="#" data-i18n="action">Find a red box!</a></p>
+          <div class="spinner" id="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+          </div>
+          <p><a class="btn btn-primary btn-block" id="start-find" role="button" href="#" data-i18n="action" style="display:none">Find a red box!</a></p>
           <p class="card-text lead" data-i18n="pitch">
             Belgian red letterboxes: you never know quite where they are and when
             they get serviced. Now there’s an app that tells you:
@@ -42,9 +47,9 @@
 <script src="assets/js/main.js" charset="utf-8"></script>
 <script>
     document.getElementById("start-find").addEventListener("click", function () {
-    geoLocate._onClickGeolocate();
-    document.getElementById("overlayContainer").style.display = "none";
-  });
+        geoLocate._onClickGeolocate();
+        document.getElementById("overlayContainer").style.display = "none";
+    });
 </script>
 </body>
 </html>

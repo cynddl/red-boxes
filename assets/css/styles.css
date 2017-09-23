@@ -102,12 +102,12 @@ p {
 }
 
 a {
-    color: #0275d8;
+    color: #ff0000;
     text-decoration: none;
 }
 
 a:focus, a:hover {
-    color: #014c8c;
+    color: #cc0000;
     text-decoration: underline;
 }
 
@@ -315,31 +315,31 @@ h1 {
 
 .btn-primary {
     color: #fff;
-    background-color: #0275d8;
-    border-color: #0275d8;
+    background-color: #ff0000;
+    border-color: #e60000;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #025aa5;
-    border-color: #01549b;
+    background-color: #cc0000;
+    border-color: #660000;
 }
 
 .btn-primary:focus {
-    -webkit-box-shadow: 0 0 0 2px rgba(2, 117, 216, 0.5);
-    box-shadow: 0 0 0 2px rgba(2, 117, 216, 0.5);
+    -webkit-box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
 }
 
 .btn-primary:disabled {
-    background-color: #0275d8;
-    border-color: #0275d8;
+    background-color: #ff0000;
+    border-color: #e60000;
 }
 
 .btn-primary:active {
     color: #fff;
-    background-color: #025aa5;
     background-image: none;
-    border-color: #01549b;
+    background-color: #cc0000;
+    border-color: #660000;
 }
 
 .btn-block {
